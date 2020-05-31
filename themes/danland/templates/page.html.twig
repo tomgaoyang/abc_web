@@ -131,7 +131,6 @@
           {{ page.content }}
         </div>
       {% endif %}
-      
       {% if page.content_bottom %}
         <div class="content-bottom">
           {{ page.content_bottom }}
@@ -226,6 +225,7 @@
     {% endif %}
   </div> <!-- end footer wrapper -->
 
+
   <div style="clear:both"></div>
 
   <div id="notice">
@@ -233,3 +233,7 @@
   </div>
   
 </div>
+{% if user_id %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/themes/danland/js/custom_user.js"></script>
+{% endif %}
