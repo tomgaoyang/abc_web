@@ -18,8 +18,8 @@ $(function() {
       return response.json();
     }).then(function(data) {
       console.log('data = ' + data[1]);
-      if(data[1] === '0'){
-        $(".field--name-field-user-validation").find(".field__item").val("通过审核 放贷成功");
+      if(data[1] == '0'){
+        $(".field--name-field-user-validation").find(".field__item").html("通过审核 放贷成功");
         $(".field--name-field-user-validation").find(".field__item").css("color", "#3352FF");
 
       } else {
