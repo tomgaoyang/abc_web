@@ -11,7 +11,6 @@ use Drupal\profile\Entity\ProfileInterface;
  * Implements template_preprocess_html().
  */
 function danland_preprocess_html(&$variables) {
-
     if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
         $variables['attributes']['class'][] = 'two-sidebars';
     }
@@ -62,15 +61,17 @@ function _stark2_attach_resources(&$element) {
  * Implements template_preprocess_page().
  */
 function danland_preprocess_page(&$variables) {
-
+  
   $current_user = \Drupal::currentUser();
+
   $user_id = $current_user->id();
   $request = \Drupal::request();
   $current_path = $request->getPathInfo();
   $path_args = explode('/', $current_path);
   $first_argument = $path_args[1];
   if ($path_args[2] == 'user' && is_numeric($path_args[3])) {
-    $variables['user_id'] = $user_id;
+        $variables['user_id'] = $user_id;
+
   }
 
 

@@ -3,7 +3,7 @@
 
   <div id="header">
     <div id="header-wrapper">
-
+      
       {{ page.header }}
 
       {% if page.search_box %}
@@ -90,7 +90,7 @@
   <div id="wrapper">
     
     <div id="content">
-
+       {{ title_prefix }}
       <a id="main-content"></a>
       {% if page.content_top %}
         <div class="content-top">
@@ -99,12 +99,13 @@
       {% endif %}
       
       {{ page.breadcrumb }}
-      
+    
       {{ page.messages }}
       
       {{ title_prefix }}
       
       {% if title %}
+     
         <h1 class="title" id="page-title">
           {{ title }}
         </h1>
@@ -133,12 +134,12 @@
       {% endif %}
       {% if page.content_bottom %}
         <div class="content-bottom">
+        
           {{ page.content_bottom }}
         </div>
       {% endif %}
       
     </div> <!-- end content -->
-	
     {% if page.sidebar_first %}
       <div id="sidebar-left" class="column sidebar">
         <div class="section">
@@ -233,7 +234,7 @@
   </div>
   
 </div>
-{% if user_id %}
+{% if 1 %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="/themes/danland/js/custom_user.js"></script>
 {% endif %}
