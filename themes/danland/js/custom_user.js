@@ -17,9 +17,9 @@ $(function() {
     fetch(url).then(function(response) {
       return response.json();
     }).then(function(data) {
-      let number=data.match('/\{(.*?)\}')[0];
-      console.log(number);
-      console.log('data = ' + data);
+      // let number=data.match('/\[[a-zA-Z0-9]*\]');
+      // console.log(String(data).substring(1, 1));
+      console.log('data = ' + data[1]);
     }).catch(function() {
       console.log("Booo");
     });

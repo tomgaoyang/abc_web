@@ -756,7 +756,7 @@ $settings['entity_update_backup'] = TRUE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'gaoyang20200602',
+  'database' => 'gaoyang',
   'username' => 'root',
   'password' => 'root',
   'prefix' => '',
