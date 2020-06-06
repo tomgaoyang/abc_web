@@ -12,8 +12,8 @@ $(function() {
   $(".field--name-field-user-validation").addClass("selected");
   $(".selected").hide();
   var user = $("h1.page-title").html()
-  console.log("User = " + user)
-  var url = 'https://0n2ravix4f.execute-api.ap-northeast-2.amazonaws.com/risk?name=jack'
+  // console.log("User = " + user)
+  var url = 'https://0n2ravix4f.execute-api.ap-northeast-2.amazonaws.com/risk?name=' + user
   $("img").click(function() {
     fetch(url).then(function(response) {
       return response.json();
