@@ -26,9 +26,9 @@ $(function() {
         $(".field--name-field-user-validation").find(".field__item").val("未通过审核");
         $(".field--name-field-user-validation").find(".field__item").css("color", "#e33e33");
       }
-    }).catch(error){
-      console.log(error)
-    };
+    }).catch(function() {
+      console.log("Booo");
+    });
     $(".selected").delay(500).show(0);
 
     $(".field__item").find('img').hide();
