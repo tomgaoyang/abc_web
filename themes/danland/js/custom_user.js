@@ -17,14 +17,20 @@ $(function() {
     fetch(url).then(function(response) {
       return response.json();
     }).then(function(data) {
-      // let number=data.match('/\[[a-zA-Z0-9]*\]');
-      // console.log(String(data).substring(1, 1));
       console.log('data = ' + data[1]);
+      if(int(data[1]) === 0){
+        $(".field--name-field-user-validation").find(".field__item").val("通过审核 放贷成功");
+        $(".field--name-field-user-validation").find(".field__item").css("color", "#3352FF");
+        
+      } else {
+        $(".field--name-field-user-validation").find(".field__item").val("未通过审核");
+        $(".field--name-field-user-validation").find(".field__item").css("color", "#e33e33");
+      }
     }).catch(function() {
       console.log("Booo");
     });
     $(".selected").delay(500).show(0);
-    $(".field--name-field-user-validation").find(".field__item").css("color", "#e33e33");
+
     $(".field__item").find('img').hide();
   });
 });
