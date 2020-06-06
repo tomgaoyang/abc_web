@@ -17,7 +17,7 @@ $(function() {
     fetch(url).then(function(response) {
       return response.json();
     }).then(function(data) {
-      let number=str.match(/\{(.*?)\})[0];
+      let number=data.match('/\{(.*?)\}')[0];
       console.log(number);
       console.log('data = ' + data);
     }).catch(function() {
