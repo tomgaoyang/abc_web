@@ -5,14 +5,14 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\Core\Render\Element;
+use Drupal\profile\Entity\ProfileInterface;
 
 /**
  * Implements template_preprocess_html().
  */
 function danland_preprocess_html(&$variables) {
-
     if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
-        $variables['attributes']['class'][] = 'two-sidebars';        
+        $variables['attributes']['class'][] = 'two-sidebars';
     }
     elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
         $variables['attributes']['class'][] = 'one-sidebar';
@@ -20,7 +20,7 @@ function danland_preprocess_html(&$variables) {
     else {
         $variables['attributes']['class'][] = 'no-sidebars';
     }
-	
+  
     if (!empty($variables['page']['sidebar_first']) && empty($variables['page']['sidebar_second'])) {
         $variables['attributes']['class'][] = 'one-sidebar-left';        
     }
@@ -31,15 +31,55 @@ function danland_preprocess_html(&$variables) {
 }
 
 /**
+ * Helper function for attaching resources to a render array.
+ */
+function _stark2_attach_resources(&$element) {
+  $element['#attached']['css'][] = array(
+    'type' => 'external',
+    'data' => '//cdn.jsdelivr.net/alertify.js/0.4.0rc1/themes/alertify.css',
+    'every_page' => TRUE,
+  );
+  $element['#attached']['css'][] = array(
+    'type' => 'external',
+    'data' => '//cdn.jsdelivr.net/alertify.js/0.4.0rc1/themes/alertify.default.css',
+    'every_page' => TRUE,
+  );
+  $element['#attached']['js'][] = array(
+    'type' => 'external',
+    'data' => '//cdn.jsdelivr.net/alertify.js/0.4.0rc1/alertify.js',
+    'every_page' => TRUE,
+  );
+  $element['#attached']['js'][] = array(
+    'type' => 'inline',
+    'data' => '(function($){ $(document).ready(function () { Alertify.dialog.alert("This is the Alertify.js plugin. Drupal loaded external CSS and JS resources and then this inline script to display this message."); }); })(jQuery)',
+    'every_page' => TRUE,
+  );
+}
+
+
+/**
  * Implements template_preprocess_page().
  */
 function danland_preprocess_page(&$variables) {
-    
+  
+  $current_user = \Drupal::currentUser();
+
+  $user_id = $current_user->id();
+  $request = \Drupal::request();
+  $current_path = $request->getPathInfo();
+  $path_args = explode('/', $current_path);
+  $first_argument = $path_args[1];
+  if ($path_args[2] == 'user' && is_numeric($path_args[3])) {
+        $variables['user_id'] = $user_id;
+
+  }
+
+
     $variables['danland_layout'] = new Attribute;
     $variables['danland_layout']['id'] = array();
     
     if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
-        $variables['danland_layout']['id'][] = 'layout-type-2';        
+        $variables['danland_layout']['id'][] = 'layout-type-2';
     }
     elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
         $variables['danland_layout']['id'][] = 'layout-type-1';
@@ -59,7 +99,7 @@ function danland_preprocess_page(&$variables) {
     $variables['danland_bottom_b'] = new Attribute;
     $variables['danland_bottom_b']['class'] = array();
     $variables['danland_bottom_b']['class'][] = 'in' . $bottom_b;
-	
+  
     $mask = '/\.(?:jp[e]?g|gif|png)$/i';
     $files = file_scan_directory(drupal_get_path('theme', 'danland') . '/images/slideshows', $mask);
     ksort($files);
@@ -71,8 +111,6 @@ function danland_preprocess_page(&$variables) {
  * Implements template_preprocess_block().
  */
 function danland_preprocess_block(&$variables) {
-    
     $variables['attributes']['class'][] = 'block';
     $variables['title_attributes']['class'][] = 'block-title';
-    
 }
